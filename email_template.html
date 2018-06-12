@@ -1,0 +1,23 @@
+<html>
+<!-- the below block is to get the environment variables as input 
+All the details used inside this template should be defined as environment variables in the calling groovy script
+-->
+<%
+def envOverrides = it.getAction("org.jenkinsci.plugins.workflow.cps.EnvActionImpl").getOverriddenEnvironment()
+BUILTARTIFACT =  envOverrides["artifactName"]
+SCM_URL = envOverrides["SCM_URL"]
+APPNAME = envOverrides["APPNAME"]
+BRANCH_NAME = envOverrides["BRANCH_NAME"]
+CONSOLE_OUT = envOverrides["CONSOLE_OUT"]
+%>
+
+<span style="font-size:12.0pt;font-family:Arial, Tahoma, Verdana, sans-serif">
+<b>Successfully Built :&nbsp;&nbsp;</b>${APPNAME}-${BRANCH_NAME}
+<br>
+<br><b>Source Countrol path:&nbsp;&nbsp;</b>${SCM_URL}
+<br><b>Application:&nbsp;&nbsp;</b>${APPNAME}
+<br><b>Branch:&nbsp;&nbsp;</b>${BRANCH_NAME}
+<br><b>Artifact Built:&nbsp;&nbsp;</b>${BUILTARTIFACT}
+<br><b>Script Log:&nbsp;&nbsp;</b><a href="${CONSOLE_OUT}">${CONSOLE_OUT}</a>
+</span>
+</html>
